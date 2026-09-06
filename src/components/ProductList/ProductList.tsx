@@ -46,15 +46,16 @@ const getTotalPrice = (items: IProduct[] = []) => {
 
 export function ProductList() {
   const [addedItems, setAddedItems] = useState<IProduct[]>([]);
-  const { tg , queryId } = useTelegram();
+  const { tg, queryId } = useTelegram();
 
   const onSendData = useCallback(() => {
     const data = {
       products: addedItems,
       totalPrice: getTotalPrice(addedItems),
-      queryId
+      queryId,
     };
 
+    alert(queryId);
     fetch("https://tg-web-app-bot-ur6t.onrender.com/web-data", {
       method: "POST",
       headers: {
@@ -62,7 +63,7 @@ export function ProductList() {
       },
       body: JSON.stringify(data),
     });
-  }, [addedItems]);
+  }, [addedItems, queryId]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
@@ -89,7 +90,7 @@ export function ProductList() {
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `Купить ${getTotalPrice(addedItems)}`,
+        text: `Купить ${getTotalPrice(newItems)}`,
       });
     }
   };
