@@ -30,7 +30,7 @@ export function Form() {
     };
 
     tg.sendData(JSON.stringify(data));
-  }, []);
+  }, [formData, tg]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
