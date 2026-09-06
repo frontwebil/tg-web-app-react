@@ -1,3 +1,5 @@
+import "./style.css";
+
 import { useTelegram } from "../../hooks/useTelegram";
 import { Button } from "../Button/Button";
 
