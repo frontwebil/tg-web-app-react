@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./style.css";
 import { useTelegram } from "../../hooks/useTelegram";
 
@@ -23,6 +23,22 @@ export function Form() {
   };
 
   const { tg } = useTelegram();
+
+  const onSendData = useCallback(() => {
+    const data = {
+      ...formData,
+    };
+
+    tg.sendData(JSON.stringify(data));
+  }, []);
+
+  useEffect(() => {
+    tg.onEvent("mainButtonClicked", onSendData);
+
+    return () => {
+      tg.offEvent("mainButtonClicked", onSendData);
+    };
+  }, [onSendData]);
 
   useEffect(() => {
     tg.MainButton.setParams({
