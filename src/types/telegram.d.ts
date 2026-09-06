@@ -1,18 +1,9 @@
-interface Window {
-  Telegram: {
-    WebApp: {
-      ready: () => void;
-      expand: () => void;
-      close: () => void;
+import type { Telegram } from "@types/telegram-web-app";
 
-      initDataUnsafe: {
-        user?: {
-          id: number;
-          username?: string;
-          first_name?: string;
-          last_name?: string;
-        };
-      };
-    };
-  };
+declare global {
+  interface Window {
+    Telegram: Telegram;
+  }
 }
+
+export {};

@@ -1,17 +1,13 @@
+import { useTelegram } from "../../hooks/useTelegram";
 import { Button } from "../Button/Button";
 
 export function Header() {
-  const tg = window.Telegram.WebApp;
+  const { user, onClose } = useTelegram();
 
-  const onClose = () => {
-    tg.close();
-  };
   return (
     <header className="header">
       <Button onClick={onClose}>Закрити</Button>
-      <span className="username">
-        {tg.initDataUnsafe?.user?.username ?? ""}
-      </span>
+      <span className="username">{user?.username ?? ""}</span>
     </header>
   );
 }
