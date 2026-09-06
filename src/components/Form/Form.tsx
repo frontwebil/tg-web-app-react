@@ -25,20 +25,28 @@ export function Form() {
   const { tg } = useTelegram();
 
   const onSendData = useCallback(() => {
+    alert("MAIN BUTTON CLICKED");
+
     const data = {
       ...formData,
     };
 
+    alert(JSON.stringify(data));
+
     tg.sendData(JSON.stringify(data));
+
+    alert("SEND DATA CALLED");
   }, [formData, tg]);
 
   useEffect(() => {
+    alert("SUBSCRIBING TO MAIN BUTTON");
+
     tg.onEvent("mainButtonClicked", onSendData);
 
     return () => {
       tg.offEvent("mainButtonClicked", onSendData);
     };
-  }, [onSendData]);
+  }, [tg, onSendData]);
 
   useEffect(() => {
     tg.MainButton.setParams({
