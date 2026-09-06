@@ -1,8 +1,15 @@
 import "./style.css";
 
 import { Button } from "../Button/Button";
+import type { IProduct } from "../ProductList/ProductList";
 
-export const ProductItem = ({ product, onAdd }) => {
+export const ProductItem = ({
+  product,
+  onAdd,
+}: {
+  product: IProduct;
+  onAdd: (product: IProduct) => void;
+}) => {
   const onAddHandler = () => {
     onAdd(product);
   };
